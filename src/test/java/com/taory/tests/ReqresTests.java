@@ -1,5 +1,6 @@
 package com.taory.tests;
 
+import jdk.internal.org.jline.utils.ShutdownHooks;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
 public class ReqresTests {
+
     @Test
     @DisplayName("Register successful")
     void registerSuccessful() {
