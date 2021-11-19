@@ -1,15 +1,19 @@
-package com.taory;
+package com.taory.tests;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.taory.filters.CustomLogFilter.customLogFilter;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
 public class ReqresTests {
     @Test
+    @DisplayName("Register successful")
     void registerSuccessful() {
         given()
+                .filter(customLogFilter().withCustomTemplates())
                 .contentType(JSON)
                 .body("{\"email\": \"eve.holt@reqres.in\", \"password\": \"pistol\"}")
                 .when()
@@ -20,8 +24,10 @@ public class ReqresTests {
     }
 
     @Test
+    @DisplayName("Register unsuccessful")
     void registerUnsuccessful() {
         given()
+                .filter(customLogFilter().withCustomTemplates())
                 .contentType(JSON)
                 .body("{\"email\": \"sydney@fife\"}")
                 .when()
@@ -32,8 +38,10 @@ public class ReqresTests {
     }
 
     @Test
+    @DisplayName("Update put")
     void updatePut() {
         given()
+                .filter(customLogFilter().withCustomTemplates())
                 .contentType(JSON)
                 .body("{\"name\": \"morpheus\",\"job\": \"zion resident\"}")
                 .when()
@@ -44,8 +52,10 @@ public class ReqresTests {
     }
 
     @Test
+    @DisplayName("Update patch")
     void updatePatch() {
         given()
+                .filter(customLogFilter().withCustomTemplates())
                 .contentType(JSON)
                 .body("{\"name\": \"morpheus\",\"job\": \"zion resident\"}")
                 .when()
@@ -56,8 +66,10 @@ public class ReqresTests {
     }
 
     @Test
+    @DisplayName("Delete user")
     void delete() {
         given()
+                .filter(customLogFilter().withCustomTemplates())
                 .contentType(JSON)
                 .body("{\"name\": \"morpheus\",\"job\": \"zion resident\"}")
                 .when()
