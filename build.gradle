@@ -25,7 +25,6 @@ dependencies {
             "com.codeborne:selenide:5.24.2",
             "io.rest-assured:rest-assured:4.3.1",
             "io.rest-assured:json-schema-validator:4.3.1",
-            "org.aeonbits.owner:owner:1.0.12",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "org.assertj:assertj-core:3.19.0",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
