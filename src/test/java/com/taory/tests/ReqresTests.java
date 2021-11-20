@@ -16,6 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReqresTests {
 
+    private final UserWithJob userWithJob = UserWithJob.builder()
+            .name("morpheus")
+            .job("zion resident")
+            .build();
+
     @Test
     @DisplayName("Single user")
     void singleUserWithLombokModel() {
@@ -71,44 +76,35 @@ public class ReqresTests {
     @Test
     @DisplayName("Update put")
     void updatePut() {
-        UserWithJob user = new UserWithJob();
-        user.setName("morpheus");
-        user.setJob("zion resident");
         given()
                 .spec(request)
-                .body(user)
+                .body(userWithJob)
                 .when()
                 .put(("https://reqres.in/api/users?page=2"))
                 .then()
                 .statusCode(200)
-                .body("name", is(user.getName()));
+                .body("name", is(userWithJob.getName()));
     }
 
     @Test
     @DisplayName("Update patch")
     void updatePatch() {
-        UserWithJob user = new UserWithJob();
-        user.setName("morpheus");
-        user.setJob("zion resident");
         given()
                 .spec(request)
-                .body(user)
+                .body(userWithJob)
                 .when()
                 .patch(("https://reqres.in/api/users?page=2"))
                 .then()
                 .statusCode(200)
-                .body("job", is(user.getJob()));
+                .body("job", is(userWithJob.getJob()));
     }
 
     @Test
     @DisplayName("Delete user")
     void delete() {
-        UserWithJob user = new UserWithJob();
-        user.setName("morpheus");
-        user.setJob("zion resident");
         given()
                 .spec(request)
-                .body(user)
+                .body(userWithJob)
                 .when()
                 .delete(("https://reqres.in/api/users?page=2"))
                 .then()
