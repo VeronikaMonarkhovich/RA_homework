@@ -11,6 +11,7 @@ import static com.taory.specification.ReqresSpecs.request;
 import static com.taory.filters.CustomLogFilter.customLogFilter;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,7 +24,7 @@ public class ReqresTests {
 
     @Test
     @DisplayName("Single user")
-    void singleUserWithLombokModel() {
+    void singleUser() {
         LombokUserData data = given()
                 .filter(customLogFilter().withCustomTemplates())
                 .baseUri("https://reqres.in")
@@ -37,7 +38,7 @@ public class ReqresTests {
                 .log().body()
                 .extract().as(LombokUserData.class);
 
-        assertEquals("Janet",data.getUser().getFirstName());
+        assertEquals("Janet", data.getUser().getFirstName());
     }
 
     @Test
@@ -109,5 +110,18 @@ public class ReqresTests {
                 .delete(("https://reqres.in/api/users?page=2"))
                 .then()
                 .statusCode(204);
+    }
+
+    @Test
+    @DisplayName("Check resource name")
+    public void checkResourceNameGroovy() {
+        given()
+                .spec(request)
+                .when()
+                .get(("https://reqres.in/api/unknown"))
+                .then()
+                .log().body()
+                .body("data.findAll{it.name}.name.flatten()",
+                        hasItem("true red"));
     }
 }
